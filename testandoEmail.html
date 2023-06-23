@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Monitoramento de anomalias</title>
+  <style>
+    /* Estilos do menu lateral */
+    /* ... estilos existentes ... */
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <!-- ... conteúdo existente ... -->
+  </div>
+  <div class="content">
+    <h1><span>&#10140;</span> Autorizador / Autorizador-HML</h1>
+    <table>
+      <!-- ... tabela existente ... -->
+    </table>
+
+    <footer>
+      Este é o rodapé do documento.
+    </footer>
+
+    <script>
+      // Função para atualizar o status do campo em tempo real
+      function updateStatus(elementId, status) {
+        const element = document.getElementById(elementId);
+        element.textContent = status;
+
+        // Atualiza a classe do elemento para definir a cor de fundo
+        if (status === 'Online' || status === 'Funcionando' || status === 'Processando' || status === 'OK') {
+          element.className = 'green';
+        } else {
+          element.className = 'red';
+        }
+      }
+
+      // Função para enviar o XML por e-mail
+      function enviarXMLPorEmail() {
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
+          <root>
+            <elemento1>Valor 1</elemento1>
+            <elemento2>Valor 2</elemento2>
+          </root>`;
+
+        const emailData = {
+          to: 'lsilva@orizon.com.br', // Substitua pelo seu e-mail
+          subject: 'XML de Monitoramento',
+          body: xml
+        };
+
+        // Simulação do envio do e-mail (substitua com a implementação real do envio)
+        const emailService = {
+          sendEmail: function (data) {
+            console.log('Enviando e-mail:', data);
+            // Aqui você pode usar uma biblioteca ou serviço de e-mail para enviar o e-mail com o XML anexado.
+            // Exemplo com o pacote nodemailer:
+            // ...
+          }
+        };
+
+        emailService.sendEmail(emailData);
+      }
+
+      // Simulação de atualização em tempo real
+      setInterval(function() {
+        // Atualiza o status de cada operadora aleatoriamente
+        const operadoras = ['bradesco', 'cassi', 'notredame', 'intermedica', 'cabesp'];
+        operadoras.forEach(function(operadora) {
+          // Atualiza o status do Banco de dados aleatoriamente
+          const databaseStatus = Math.random() < 0.5 ? 'Online' : 'Caiu';
+          updateStatus(`${operadora}-database`, databaseStatus);
+
+          // Atualiza o status do Roteador aleatoriamente
+          const routerStatus = Math.random() < 0.5 ? 'Funcionando' : 'Falha';
+          updateStatus(`${operadora}-router`, routerStatus);
+
+          // Atualiza o status do Processamento aleatoriamente
+          const processingStatus = Math.random() < 0.5 ? 'Processando' : 'Não Processando';
+          updateStatus(`${operadora}-processing`, processingStatus);
+
+          // Atualiza o status das Regras aleatoriamente
+          const rulesStatus = Math.random() < 0.5 ? 'OK' : 'Problema nas regras';
+          updateStatus(`${operadora}-rules`, rulesStatus);
+          document.getElementById(`${operadora}-status`).innerText = rulesStatus === 'OK' ? 'Regular' : `Campos com anomalias: Verificar (${rulesStatus})`;
+        });
+      }, 2000); // Atualiza a cada 2 segundos (2000 milissegundos)
+
+      // Chama a função para enviar o XML por e-mail
+      enviarXMLPorEmail();
+    </script>
+  </div>
+</body>
+</html>

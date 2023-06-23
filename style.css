@@ -1,0 +1,130 @@
+/* Estilos do menu lateral */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    background: rgb(96, 133, 255);
+    color: #ffffff;
+    width: 110px;
+    padding: 20px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .logo-texto {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .user img {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-nombre {
+    font-weight: bold;
+  }
+  
+  .menu-nav {
+    margin-top: 20px;
+  }
+  
+  .menu-titles {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .menu-items {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .menu-items a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-nav--icon {
+    margin-right: 10px;
+  }
+  
+  /* Estilos do conteúdo principal */
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: blue; /* Fundo azul */
+    color: white; /* Texto em branco */
+  }
+  h1 {
+    text-align: left;
+    color: white; /* Título em azul */
+    margin-bottom: 35px; /* Espaço abaixo do h1 */
+  }
+  h1::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: white; /* Cor do quadradinho */
+    border-radius: 50%; /* Deixa o quadradinho redondo */
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgb(247, 247, 7); /* Fundo verde da tabela */
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color: blue; /* Texto em azul */
+  }
+  .green {
+    background-color: #b3ffb3;
+  }
+  .red {
+    background-color: #ffb3b3;
+  }
+  .alert {
+    font-weight: bold;
+    color: rgb(255, 4, 4);
+  }
+
+  footer {
+    margin-top: 90%; /* Espaço acima do rodapé */
+    text-align: center;
+    background-color: rgb(96, 133, 255); /* Fundo azul */
+    color: #ffffff;
+    padding: 10px;
+    width: 100%; /* Define a largura do rodapé como 100% do contêiner pai */
+    box-sizing: border-box; /* Considera a largura total incluindo o padding */
+  }

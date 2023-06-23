@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Monitoramento de anomalias</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: black; /* Fundo preto */
+      color: white; /* Texto em branco */
+    }
+    h1 {
+      text-align: left;
+      color: rgb(231, 112, 0); /* Título em azul */
+    }
+    h1::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -20px;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      background-color: rgb(253, 147, 9); /* Cor do quadradinho */
+      border-radius: 50%; /* Deixa o quadradinho redondo */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgb(247, 247, 7); /* Fundo verde da tabela */
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      color: blue; /* Texto em azul */
+    }
+    .green {
+      background-color: #b3ffb3;
+    }
+    .red {
+      background-color: #ffb3b3;
+    }
+    .alert {
+      font-weight: bold;
+      color: rgb(255, 4, 4);
+    }
+  </style>
+</head>
+<body>
+    <h1><span>&#10140;</span> Autorizador / Autorizador-HML</h1>
+  <table>
+    <tr>
+      <th>Operadora</th>
+      <th>Banco de dados</th>
+      <th>Roteador</th>
+      <th>Processamento</th>
+      <th>Regras</th>
+      <th>Status</th>
+    </tr>
+    <tr>
+      <td>Bradesco</td>
+      <td id="bradesco-database" class="green">Online</td>
+      <td id="bradesco-router" class="green">Funcionando</td>
+      <td id="bradesco-processing" class="green">Processando</td>
+      <td id="bradesco-rules" class="green">OK</td>
+      <td id="bradesco-status"></td>
+    </tr>
+    <tr>
+      <td>Cassi</td>
+      <td id="cassi-database" class="red">Caiu</td>
+      <td id="cassi-router" class="green">Funcionando</td>
+      <td id="cassi-processing" class="green">Processando</td>
+      <td id="cassi-rules" class="green">OK</td>
+      <td id="cassi-status" class="alert">Problema no banco de dados: Tabela alterada irregularmente</td>
+    </tr>
+    <tr>
+      <td>Notredame</td>
+      <td id="notredame-database" class="green">Online</td>
+      <td id="notredame-router" class="red">Falha</td>
+      <td id="notredame-processing" class="green">Processando</td>
+      <td id="notredame-rules" class="green">OK</td>
+      <td id="notredame-status" class="alert">Problema no roteador: Roteamento incorreto</td>
+    </tr>
+    <tr>
+      <td>Intermedica</td>
+      <td id="intermedica-database" class="green">Online</td>
+      <td id="intermedica-router" class="green">Funcionando</td>
+      <td id="intermedica-processing" class="red">Não Processando</td>
+      <td id="intermedica-rules" class="green">OK</td>
+      <td id="intermedica-status" class="alert">Problema no processamento: Processo interrompido</td>
+    </tr>
+    <tr>
+      <td>Cabesp</td>
+      <td id="cabesp-database" class="green">Online</td>
+      <td id="cabesp-router" class="green">Funcionando</td>
+      <td id="cabesp-processing" class="green">Processando</td>
+      <td id="cabesp-rules" class="red">Problema nas regras</td>
+      <td id="cabesp-status" class="alert">Regras com erro: Não está cumprindo as regras definidas</td>
+    </tr>
+  </table>
+
+  <script>
+    // Função para atualizar o status do campo em tempo real
+    function updateStatus(elementId, status) {
+      const element = document.getElementById(elementId);
+      element.textContent = status;
+
+      // Atualiza a classe do elemento para definir a cor de fundo
+      if (status === 'Online' || status === 'Funcionando' || status === 'Processando' || status === 'OK') {
+        element.className = 'green';
+      } else {
+        element.className = 'red';
+      }
+    }
+
+    // Simulação de atualização em tempo real
+    setInterval(function() {
+      // Atualiza o status de cada operadora aleatoriamente
+      const operadoras = ['bradesco', 'cassi', 'notredame', 'intermedica', 'cabesp'];
+      operadoras.forEach(function(operadora) {
+        // Atualiza o status do Banco de dados aleatoriamente
+        const databaseStatus = Math.random() < 0.5 ? 'Online' : 'Caiu';
+        updateStatus(`${operadora}-database`, databaseStatus);
+
+        // Atualiza o status do Roteador aleatoriamente
+        const routerStatus = Math.random() < 0.5 ? 'Funcionando' : 'Falha';
+        updateStatus(`${operadora}-router`, routerStatus);
+
+        // Atualiza o status do Processamento aleatoriamente
+        const processingStatus = Math.random() < 0.5 ? 'Processando' : 'Não Processando';
+        updateStatus(`${operadora}-processing`, processingStatus);
+
+        // Atualiza o status das Regras aleatoriamente
+        const rulesStatus = Math.random() < 0.5 ? 'OK' : 'Problema nas regras';
+        updateStatus(`${operadora}-rules`, rulesStatus);
+        document.getElementById(`${operadora}-status`).innerText = rulesStatus === 'OK' ? 'Regular' : `Campos com anomalias: Verificar (${rulesStatus})`;
+      });
+    }, 2000); // Atualiza a cada 2 segundos (2000 milissegundos)
+  </script>
+</body>
+</html>
